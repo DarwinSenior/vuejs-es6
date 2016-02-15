@@ -1,12 +1,14 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-
 module.exports = {
-    entry: __dirname + '/app/app.js',
+    entry: [
+        __dirname + '/app/app.js',
+        'webpack-hot-middleware/client?noInfo=true&reload=true'
+    ],
     hostname: 'localhost',
     output: {
-        path: __dirname + '/build',
-        publicPath: __dirname + '/build/',
-        filename: 'bundle.js'
+        path: '/'
+        //path: __dirname + '/app',
+        //publicPath: __dirname + '/app/',
+        //filename: 'bundle.js'
     },
     module: {
         loaders: [
@@ -26,13 +28,10 @@ module.exports = {
         {
             test: /\.styl$/,
             loader: 'style-loader!css-loader!stylus-loader'
+        },
+        {
+            test: /\.vue$/,
+            loader: 'vue'
         }]
-    },
-    plugins: [
-        new HtmlWebpackPlugin({
-            filename: 'index.html',
-            template: 'app/index.html',
-            inject: true
-        })
-    ]
+    }
 }
