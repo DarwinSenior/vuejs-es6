@@ -1,5 +1,7 @@
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
-    entry: __dirname + '/src/app.js',
+    entry: __dirname + '/app/app.js',
     hostname: 'localhost',
     output: {
         path: __dirname + '/build',
@@ -25,5 +27,12 @@ module.exports = {
             test: /\.styl$/,
             loader: 'style-loader!css-loader!stylus-loader'
         }]
-    }
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: 'app/index.html',
+            inject: true
+        })
+    ]
 }
