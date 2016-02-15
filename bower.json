@@ -1,0 +1,31 @@
+{
+  "name": "nodejs-es6",
+  "description": "A seed project",
+  "main": "index.js",
+  "authors": [
+    "Martin Ronquillo"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "es6",
+    "nodejs",
+    "seed"
+  ],
+  "homepage": "https://github.com/RonquilloAeon/nodejs-es6",
+  "moduleType": [
+    "amd",
+    "es6",
+    "node"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "pure": "^0.6.0"
+  }
+}

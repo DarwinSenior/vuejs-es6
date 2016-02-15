@@ -1,0 +1,41 @@
+{
+  "name": "nodejs-es6",
+  "version": "1.0.0",
+  "description": "A seed project",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack-dev-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RonquilloAeon/nodejs-es6.git"
+  },
+  "keywords": [
+    "es6",
+    "nodejs",
+    "seed"
+  ],
+  "author": "Martin Ronquillo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RonquilloAeon/nodejs-es6/issues"
+  },
+  "homepage": "https://github.com/RonquilloAeon/nodejs-es6#readme",
+  "dependencies": {
+    "babel-core": "^6.4.5",
+    "babel-loader": "^6.2.2",
+    "babel-preset-es2015": "^6.3.13",
+    "crossroads": "^0.12.2",
+    "css-loader": "^0.23.1",
+    "html-loader": "^0.4.0",
+    "jquery": "^2.2.0",
+    "style-loader": "^0.13.0",
+    "stylus-loader": "^1.5.1",
+    "systemjs": "^0.19.20",
+    "webcomponents.js": "^0.7.20",
+    "webpack": "^1.12.13"
+  },
+  "devDependencies": {}
+}
