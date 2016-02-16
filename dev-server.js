@@ -1,8 +1,8 @@
 var express = require('express'),
     webpack = require('webpack'),
     config = require('./webpack.config'),
+    ExtractTextPlugin = require('extract-text-webpack-plugin'),
     HtmlWebpackPlugin = require('html-webpack-plugin');
-
 
 // TODO move this to config at later point
 config.plugins = (config.plugins || []).concat([
@@ -16,8 +16,17 @@ config.plugins = (config.plugins || []).concat([
     })
 ]);
 
+config.vue = {
+    loader: {
+        css: ExtractTextPlugin.extract('css'),
+        stylus: ExtractTextPlugin.extract('css!stylus')
+    }
+};
+
 var app = express();
 var compiler = webpack(config);
+
+app.use('/pure', express.static(__dirname + '/bower_components/pure'));
 
 // handle fallback for HTML5 history API
 //app.use(require('connect-history-api-fallback')())

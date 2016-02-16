@@ -3,13 +3,50 @@
 // Please keep this file neat. COMMENT as needed.
 //
 
-@require "../../bower_components/pure/pure.css"
-@require "../../bower_components/pure/grids-responsive.css"
 @import "globals"
 
 //
 // PAGE GLOBAL STYLES
 //
 
-body
-    background-color $color-white
+html, body
+    background-color $color-secondary
+    position absolute
+    display block
+    left 0
+    right 0
+    width 100%
+    top 0
+    bottom 0
+    height 100%
+
+    .pure-g > div
+        -webkit-box-sizing border-box
+        -moz-box-sizing border-box
+        box-sizing border-box
+    
+    .box
+        padding .5em
+
+//
+// TYPOGRAPHY
+//
+
+h1
+    color $color-white
+    font-size 4em
+    margin .5em
+    line-height 1em
+    text-align center
+
+//
+// NAV DEFAULTS
+//
+
+nav
+    ul
+        margin 0
+        padding 0
+        list-style-type none
+        li
+            float left
