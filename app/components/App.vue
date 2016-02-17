@@ -14,7 +14,7 @@
         </div>
     </header>
     <div>
-        <h1>Todo!</h1>
+        <h1>&#161;Todo!</h1>
         <router-view></router-view>
     </div>
 </template>

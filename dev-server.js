@@ -2,7 +2,7 @@ var express = require('express'),
     webpack = require('webpack'),
     config = require('./webpack.config'),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
-    HtmlWebpackPlugin = require('html-webpack-plugin');
+    HtmlWebpackPlugin = require('html-webpack-plugin'); 
 
 // TODO move this to config at later point
 config.plugins = (config.plugins || []).concat([
@@ -44,6 +44,13 @@ app.use(require('webpack-dev-middleware')(compiler, {
 app.use(require('webpack-hot-middleware')(compiler, {
     log: console.log
 }));
+
+// API
+var bodyParser = require('body-parser'),
+    api = require('./server/api');
+
+app.use(bodyParser.json());
+app.use('/api', api);
 
 app.listen(9090, 'localhost', function (err) {
     if (err) {
