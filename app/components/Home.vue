@@ -23,13 +23,23 @@
 </template>
 
 <script>
+import items from '../services/items';
+
 export default {
     data() {
         return {
-            items: [
-                { content: 'Sample content', checked: false }
-            ]
+            items: items.items
         }
+    },
+    watch() {
+        return {
+            items: {
+                deep: true
+            }
+        }
+    },
+    ready() {
+        items.getAll();
     }
 }
 </script>

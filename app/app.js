@@ -1,12 +1,12 @@
 // Global app imports
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 // Component imports
-import App from './components/App.vue'
-import Home from './components/Home.vue'
+import App from './components/App.vue';
+import Home from './components/Home.vue';
 
 // Router
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 var router = new VueRouter();
 
 router.map({
@@ -15,4 +15,4 @@ router.map({
     }
 })
 
-router.start(App, '#app')
+router.start(App, '#app');
