@@ -1,6 +1,9 @@
+var path = require('path'),
+    rootDir = path.join(__dirname, '/app');
+
 module.exports = {
     entry: [
-        __dirname + '/app/app.js',
+        path.join(rootDir, 'app.js'),
         'webpack-hot-middleware/client?noInfo=true&reload=true'
     ],
     hostname: 'localhost',
@@ -33,5 +36,11 @@ module.exports = {
             test: /\.vue$/,
             loader: 'vue'
         }]
+    },
+    resolve: {
+        root: rootDir,
+        alias: {
+            
+        }
     }
 }

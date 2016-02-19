@@ -1,6 +1,7 @@
 // Global app imports
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+
 // Component imports
 import App from './components/App.vue';
 import Home from './components/Home.vue';

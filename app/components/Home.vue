@@ -28,18 +28,14 @@ import items from '../services/items';
 export default {
     data() {
         return {
-            items: items.items
-        }
-    },
-    watch() {
-        return {
-            items: {
-                deep: true
-            }
+            items: []
         }
     },
     ready() {
-        items.getAll();
+        items.getAll()
+            .then((response) => {
+                this.items = response;
+            });
     }
 }
 </script>
