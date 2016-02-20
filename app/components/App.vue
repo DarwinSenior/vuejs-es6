@@ -31,5 +31,5 @@
                     text-decoration: none
                     &:link
                     &:visited
-                        color $color-white
+                        color $color-secondary
 </style>
