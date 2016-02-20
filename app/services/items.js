@@ -1,25 +1,38 @@
 import { api } from './base';
+import { EventEmitter } from 'events';
 
-var getAll = function() {
-    const items = api.all('items');
-    
+const items = api.all('items');
+const itemHandler = new EventEmitter();
+export default itemHandler;
+
+itemHandler.getAll = () => { 
     return new Promise((resolve, reject) => {
         items.getAll()
-            .then((response) => {
+            .then(response => {
                 const entities = response.body();
-                var items = [];
+                var i = [];
 
-                entities.forEach((entity) => {
-                    items.push(entity.data());
+                entities.forEach(entity => {
+                    i.push(entity.data());
                 });
 
-                resolve(items);
-            }, (response) => {
+                itemHandler.items = i;
+                resolve(i);
+            }, response => {
                 reject('Error fetching items');
             });
     });
 }
 
-export default {
-    getAll: getAll
+itemHandler.save = text => {
+    return new Promise((resolve, reject) => {
+        items.post({ content: text, checked: false })
+            .then(response => {
+                var newItem = response.body().data();
+                itemHandler.items.push(newItem);
+                resolve(itemHandler.items);
+            }, response => {
+                reject('Error saving new item');
+            });
+    });
 }
