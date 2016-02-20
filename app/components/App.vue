@@ -7,7 +7,7 @@
                         <a v-link="{ path: '/' }">Home</a>
                     </li>
                     <li>
-                        <a v-link="'all'">All Items</a>
+                        <a v-link="'about'">About</a>
                     </li>
                 </ul>
             </nav>
@@ -28,7 +28,8 @@
             li
                 padding 5px
                 a
-                    text-decoration: none
+                    text-decoration none
+                    font-size .75em
                     &:link
                     &:visited
                         color $color-secondary

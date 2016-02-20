@@ -13,7 +13,7 @@
             <div class="pure-u-4-24 pure-u-md-1-3"></div>
             <div class="pure-u-16-24 pure-u-md-1-3">
                 <div class="pure-u-1 item-container" v-for="item in items">
-                    <input id="item-{{ item._id }}" type="checkbox" v-model="item.checked">
+                    <input id="item-{{ item._id }}" type="checkbox" v-model="item.checked" v-on:click="itemChecked(item)">
                     <label for="item-{{ item._id }}">{{ item.content }}</label>
                 </div>
             </div>
@@ -33,6 +33,15 @@ export default {
         }
     },
     methods: {
+        itemChecked(item) {
+            // TODO find better way to handle this
+            if (item.checked == true)
+                item.checked = false;
+            else
+                item.checked = true;
+
+            items.update(item);
+        },
         saveItem(event) {
             event.preventDefault();
             items.save(this.newItem)
@@ -69,7 +78,7 @@ export default {
             padding-left calc(32px + 1em)
             line-height 25px
             cursor pointer
-            border-radius .25em
+            border-radius .2em
             &::before
                 content ''
                 display block

@@ -16,7 +16,6 @@ itemHandler.getAll = () => {
                     i.push(entity.data());
                 });
 
-                itemHandler.items = i;
                 resolve(i);
             }, response => {
                 reject('Error fetching items');
@@ -29,10 +28,20 @@ itemHandler.save = text => {
         items.post({ content: text, checked: false })
             .then(response => {
                 var newItem = response.body().data();
-                itemHandler.items.push(newItem);
                 resolve(itemHandler.items);
             }, response => {
                 reject('Error saving new item');
+            });
+    });
+}
+
+itemHandler.update = item => {
+    return new Promise((resolve, reject) => {
+        items.put(item._id, item)
+            .then(response => {
+                resolve();
+            }, response => {
+                reject('Unable to save item');
             });
     });
 }

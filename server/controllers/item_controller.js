@@ -29,7 +29,33 @@ var deleteItem = function(req, res) {
     });
 };
 
+var updateItem = function(req, res) {
+    var id = req.params.itemId,
+        item = req.body;
+
+    // Delete id if in body
+    // Otherwise, Mongo will throw an error
+    if ('_id' in item)
+        delete item['_id'];
+
+    db.item.update({ 
+        _id: mongojs.ObjectId(id) 
+    },
+    req.body,
+    {
+        insert: false,
+        multi: false,
+        new: true
+    }, function(err, doc) {
+        if (err)
+            res.sendStatus(500);
+        else
+            res.sendStatus(201);
+    });
+};
+
 exports.itemList = itemList;
 exports.createItem = createItem;
 exports.getItem = getItem;
 exports.deleteItem = deleteItem;
+exports.updateItem = updateItem;

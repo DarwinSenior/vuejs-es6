@@ -11,6 +11,7 @@ router
 router
     .route('/items/:itemId')
         .get(item_controller.getItem)
-        .delete(item_controller.deleteItem);
+        .delete(item_controller.deleteItem)
+        .put(item_controller.updateItem);
 
 module.exports = router;
