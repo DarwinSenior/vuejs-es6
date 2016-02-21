@@ -9,39 +9,24 @@
                 <div class="pure-u-4-24 pure-u-md-1-3"></div>
             </div>
         </form>
-        <div id="item-wrapper" class="pure-g">
-            <div class="pure-u-4-24 pure-u-md-1-3"></div>
-            <div class="pure-u-16-24 pure-u-md-1-3">
-                <div class="pure-u-1 item-container" v-for="item in items">
-                    <input id="item-{{ item._id }}" type="checkbox" v-model="item.checked" v-on:click="itemChecked(item)">
-                    <label for="item-{{ item._id }}">{{ item.content }}</label>
-                </div>
-            </div>
-            <div class="pure-u-4-24 pure-u-md-1-3"></div>
-        </div>
+        <item-list></item-list>
     </div>
 </template>
 
 <script>
 import items from '../services/items';
+import ItemList from './ItemList.vue';
 
 export default {
+    components: {
+        ItemList
+    },
     data() {
         return {
-            newItem: '',
-            items: []
+            newItem: ''
         }
     },
-    methods: {
-        itemChecked(item) {
-            // TODO find better way to handle this
-            if (item.checked == true)
-                item.checked = false;
-            else
-                item.checked = true;
-
-            items.update(item);
-        },
+    methods: { 
         saveItem(event) {
             event.preventDefault();
             items.save(this.newItem)
@@ -50,52 +35,10 @@ export default {
                     this.newItem = '';
                 }); 
         }
-    },
-    ready() {
-        items.getAll()
-            .then(response => {
-                this.items = response;
-            });
     }
 }
 </script>
 
 <style lang="stylus" scoped>
 @import "../styles/globals"
-#item-wrapper
-    margin-top 20px
-    margin-bottom 20px
-    .item-container
-        input
-            position absolute
-            left -9999px
-        label
-            display block
-            position relative
-            color $color-secondary
-            font-weight bold
-            padding 1em
-            padding-left calc(32px + 1em)
-            line-height 25px
-            cursor pointer
-            border-radius .2em
-            &::before
-                content ''
-                display block
-                position absolute
-                left 1em
-                top 1em
-                width 25px
-                height 25px
-                border 3px solid $color-primary
-                border-radius 100px
-                -webkit-box-sizing border-box
-                -moz-box-sizing border-box
-                box-sizing border-box
-            &:hover
-                background-color $color-white
-                &::before
-                    background-color $color-primary
-        input:checked + label::before
-            background-color $color-primary
 </style>
