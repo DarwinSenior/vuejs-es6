@@ -16,4 +16,5 @@ router.map({
     }
 })
 
+Vue.config.debug = true;
 router.start(App, '#app');

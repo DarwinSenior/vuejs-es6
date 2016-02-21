@@ -1,26 +1,53 @@
 <template>
-<div id="item-wrapper" class="pure-g">
-    <div class="pure-u-4-24 pure-u-md-1-3"></div>
-    <div class="pure-u-16-24 pure-u-md-1-3">
-        <div class="pure-u-1 item-container" v-for="item in items">
-            <input id="item-{{ item._id }}" type="checkbox" v-model="item.checked" v-on:click="itemChecked(item)">
-            <label for="item-{{ item._id }}">{{ item.content }}</label>
+    <div id="item-wrapper" class="pure-g">
+        <div class="pure-u-4-24 pure-u-md-1-3"></div>
+        <div class="pure-u-16-24 pure-u-md-1-3">
+            <div class="pure-u-1">
+                <button @click="visibility = 'active'">Active</button>
+                <button @click="visibility = 'done'">Done</button>
+                <button @click="visibility = 'all'">All</button>
+            </div>
+            <div class="pure-u-1 item-container" v-for="item in filteredItems">
+                <input id="item-{{ item._id }}" type="checkbox" v-model="item.checked" v-on:click="itemChecked(item)">
+                <label for="item-{{ item._id }}">{{ item.content }}</label>
+            </div>
         </div>
+        <div class="pure-u-4-24 pure-u-md-1-3"></div>
     </div>
-    <div class="pure-u-4-24 pure-u-md-1-3"></div>
-</div>
 </template>
 
 <script>
 import items from '../services/items';
 
-export default {
+var filters = {
+    all: items => {
+        return items;
+    },
+    active: items => {
+        return items.filter(item => {
+            return !item.checked;
+        });
+    },
+    done: items => {
+        return items.filter(item => {
+            return item.checked;
+        });
+    }
+}
+
+export default { 
+    computed: {
+        filteredItems: function() {
+            return filters[this.visibility](this.items);
+        }
+    },  
     created () {
         items.on('update', this.getItems);
     },
     data() {
         return {
-            items: []
+            items: [],
+            visibility: 'active'
         }
     },
     destroyed() {
@@ -45,7 +72,7 @@ export default {
     },
     ready() {
         this.getItems();
-    }
+    } 
 }
 </script>
 
