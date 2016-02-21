@@ -1,21 +1,23 @@
 <template>
-    <header id="header-app" class="pure-g">
-        <div class="pure-u-1 box">
-            <nav>
-                <ul>
-                    <li>
-                        <a v-link="{ path: '/' }">Home</a>
-                    </li>
-                    <li>
-                        <a v-link="'about'">About</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </header>
     <div>
-        <h1>&#161;Todo!</h1>
-        <router-view></router-view>
+        <header id="header-app" class="pure-g">
+            <div class="pure-u-1 box">
+                <nav>
+                    <ul>
+                        <li>
+                            <a v-link="{ path: '/' }">Home</a>
+                        </li>
+                        <li>
+                            <a v-link="'about'">About</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <div>
+            <h1>&#161;Todo!</h1>
+            <router-view></router-view>
+        </div>
     </div>
 </template>
 
