@@ -7,7 +7,11 @@
                 <a v-bind:class="{ 'selected': visibility == 'done' }" href="#" @click="visibility = 'done'">Done</a>
                 <a v-bind:class="{ 'selected': visibility == 'all' }" href="#" @click="visibility = 'all'">All</a>
             </div>
-            <div v-show="filteredItems.length == 0">
+            <div class="pure-u-1" v-if="visibility == 'done'">
+                <a href="#" @click="deleteAll">Delete All</a>
+            </div>
+            <!-- Show if filtered list is empty -->
+            <div class="pure-u-1" v-show="filteredItems.length == 0">
                 <h2>Nothing here!</h2>
             </div>
             <div class="pure-u-1 item-container" v-for="item in filteredItems">
@@ -57,6 +61,12 @@ export default {
         items.removeListener('update', this.getItems);
     },
     methods: {
+        deleteAll() {
+            items.bulkDelete(this.filteredItems)
+                .then(response => {
+                    this.getItems();
+                });
+        },
         itemChecked(item) {
             // TODO find better way to handle this
             if (item.checked == true)

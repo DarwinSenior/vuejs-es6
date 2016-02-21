@@ -5,6 +5,19 @@ const items = api.all('items');
 const itemHandler = new EventEmitter();
 export default itemHandler;
 
+itemHandler.bulkDelete = (itemsToDelete) => {
+    return new Promise((resolve, reject) => {
+        if (itemsToDelete.length > 0) {
+            itemsToDelete.forEach(i => {
+                items.delete(i._id);
+            });
+
+            resolve();
+        } else
+            resolve();
+    });
+}
+
 itemHandler.getAll = () => { 
     return new Promise((resolve, reject) => {
         items.getAll()
