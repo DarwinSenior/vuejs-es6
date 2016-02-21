@@ -3,9 +3,12 @@
         <div class="pure-u-4-24 pure-u-md-1-3"></div>
         <div class="pure-u-16-24 pure-u-md-1-3">
             <div class="pure-u-1">
-                <button @click="visibility = 'active'">Active</button>
-                <button @click="visibility = 'done'">Done</button>
-                <button @click="visibility = 'all'">All</button>
+                <a href="#" v-bind:class="{ 'selected': visibility == 'active' }" @click="visibility = 'active'">Active</a>
+                <a v-bind:class="{ 'selected': visibility == 'done' }" href="#" @click="visibility = 'done'">Done</a>
+                <a v-bind:class="{ 'selected': visibility == 'all' }" href="#" @click="visibility = 'all'">All</a>
+            </div>
+            <div v-show="filteredItems.length == 0">
+                <h2>Nothing here!</h2>
             </div>
             <div class="pure-u-1 item-container" v-for="item in filteredItems">
                 <input id="item-{{ item._id }}" type="checkbox" v-model="item.checked" v-on:click="itemChecked(item)">
@@ -82,6 +85,17 @@ export default {
 #item-wrapper
     margin-top 20px
     margin-bottom 20px
+    a
+    &:link
+    &:visited
+        color $color-primary
+        font-size .75em
+        font-weight bold
+        text-decoration none
+        &.selected
+        &:hover
+        &:active
+            color $color-secondary
     .item-container
         input
             position absolute
