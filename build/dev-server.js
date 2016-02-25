@@ -1,20 +1,8 @@
 var express = require('express'),
     webpack = require('webpack'),
-    config = require('./webpack.config'),
-    ExtractTextPlugin = require('extract-text-webpack-plugin'),
-    HtmlWebpackPlugin = require('html-webpack-plugin'); 
-
-// TODO move this to config at later point
-config.plugins = (config.plugins || []).concat([
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new HtmlWebpackPlugin({
-        filename: 'index.html',
-        template: 'app/index.html',
-        inject: true
-    })
-]);
+    path = require('path'),
+    config = require('./webpack.dev.config'),
+    ExtractTextPlugin = require('extract-text-webpack-plugin'); 
 
 config.vue = {
     loader: {
@@ -26,7 +14,7 @@ config.vue = {
 var app = express();
 var compiler = webpack(config);
 
-app.use('/pure', express.static(__dirname + '/bower_components/pure'));
+app.use('/pure', express.static(path.resolve(__dirname, '..//bower_components/pure')));
 
 // handle fallback for HTML5 history API
 //app.use(require('connect-history-api-fallback')())
@@ -41,13 +29,22 @@ app.use(require('webpack-dev-middleware')(compiler, {
 }));
 
 // enable hot-reload and state-preserving
-app.use(require('webpack-hot-middleware')(compiler, {
+var hotMiddleware = require('webpack-hot-middleware')(compiler, {
     log: console.log
-}));
+});
+
+compiler.plugin('compilation', function(compilation) {
+    compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
+        hotMiddleware.publish({ action: 'reload' });
+        cb();
+    });
+});
+
+app.use(hotMiddleware);
 
 // API
 var bodyParser = require('body-parser'),
-    api = require('./server/api');
+    api = require(path.resolve(__dirname, '../server/api'));
 
 app.use(bodyParser.json());
 app.use('/api', api);

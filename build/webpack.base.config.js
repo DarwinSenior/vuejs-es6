@@ -1,18 +1,11 @@
 var path = require('path'),
-    rootDir = path.join(__dirname, '/app');
+    rootDir = path.resolve(__dirname, '../app');
 
 module.exports = {
     entry: [
-        path.join(rootDir, 'app.js'),
-        'webpack-hot-middleware/client?noInfo=true&reload=true'
+        path.join(rootDir, 'app.js') 
     ],
-    hostname: 'localhost',
-    output: {
-        path: '/'
-        //path: __dirname + '/app',
-        //publicPath: __dirname + '/app/',
-        //filename: 'bundle.js'
-    },
+    hostname: 'localhost', 
     module: {
         loaders: [
         {
@@ -36,6 +29,13 @@ module.exports = {
             test: /\.vue$/,
             loader: 'vue'
         }]
+    },
+    output: {
+        //path: '/',
+        //path: __dirname + '/app',
+        path: path.resolve(__dirname, '../dist/static'),
+        publicPath: '/static/',
+        filename: 'bundle.js'
     },
     resolve: {
         root: rootDir,
