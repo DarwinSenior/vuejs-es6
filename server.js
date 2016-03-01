@@ -6,6 +6,7 @@ var express = require('express'),
 var app = express();
 
 app.use('/', express.static(path.resolve(__dirname, 'dist')));
+app.use(bodyParser.json());
 app.use('/api', api);
 
 var port = 3000;

@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "rimraf dist && mkdirp dist && NODE_ENV=production webpack --progress --config build/webpack.prod.config.js",
+    "deploy": "npm run build && NODE_ENV=production pm2 start server",
     "dev": "node build/dev-server.js",
+    "shutdown": "pm2 stop server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -36,8 +38,10 @@
     "html-loader": "^0.4.0",
     "html-webpack-plugin": "^2.8.1",
     "jquery": "^2.2.0",
+    "json-loader": "^0.5.4",
     "mkdirp": "^0.5.1",
     "mongojs": "^2.3.0",
+    "pm2": "^1.0.1",
     "restful.js": "^0.9.5",
     "rimraf": "^2.5.2",
     "style-loader": "^0.13.0",

@@ -22,6 +22,10 @@ module.exports = {
             loader: 'babel-loader?presets[]=es2015'
         },
         {
+            test: /\.json$/,
+            loader: 'json'
+        },
+        {
             test: /\.styl$/,
             loader: 'style-loader!css-loader!stylus-loader'
         },
