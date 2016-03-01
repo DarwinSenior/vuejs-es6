@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use('/api', api);
 
 var port = 3000;
-app.listen(port, 'localhost', function(err) {
+app.listen(port, function(err) {
     if (err) {
         console.log(err);
         return;
