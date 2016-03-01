@@ -1,5 +1,6 @@
-# Build directories
+# Build and config
 dist
+env.json
 
 # Logs
 logs
