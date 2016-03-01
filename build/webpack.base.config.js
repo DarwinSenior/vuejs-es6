@@ -31,10 +31,8 @@ module.exports = {
         }]
     },
     output: {
-        //path: '/',
-        //path: __dirname + '/app',
-        path: path.resolve(__dirname, '../dist/static'),
-        publicPath: '/static/',
+        path: path.resolve(__dirname, '../dist'),
+        publicPath: '',
         filename: 'bundle.js'
     },
     resolve: {

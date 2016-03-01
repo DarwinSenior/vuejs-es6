@@ -14,8 +14,6 @@ config.vue = {
 var app = express();
 var compiler = webpack(config);
 
-app.use('/pure', express.static(path.resolve(__dirname, '..//bower_components/pure')));
-
 // handle fallback for HTML5 history API
 //app.use(require('connect-history-api-fallback')())
 
@@ -28,7 +26,7 @@ app.use(require('webpack-dev-middleware')(compiler, {
     }
 }));
 
-// enable hot-reload and state-preserving
+// enable hot-reload
 var hotMiddleware = require('webpack-hot-middleware')(compiler, {
     log: console.log
 });
@@ -41,6 +39,9 @@ compiler.plugin('compilation', function(compilation) {
 });
 
 app.use(hotMiddleware);
+
+// Static path for Pure.css
+app.use('/pure', express.static(path.resolve(__dirname, '../bower_components/pure')));
 
 // API
 var bodyParser = require('body-parser'),
