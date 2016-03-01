@@ -40,9 +40,6 @@ compiler.plugin('compilation', function(compilation) {
 
 app.use(hotMiddleware);
 
-// Static path for Pure.css
-app.use('/pure', express.static(path.resolve(__dirname, '../bower_components/pure')));
-
 // API
 var bodyParser = require('body-parser'),
     api = require(path.resolve(__dirname, '../server/api'));

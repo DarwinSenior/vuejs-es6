@@ -7,7 +7,6 @@ var app = express();
 
 app.use('/', express.static(path.resolve(__dirname, 'dist')));
 app.use('/api', api);
-app.use('/pure', express.static(path.resolve(__dirname, 'bower_components/pure')));
 
 var port = 3000;
 app.listen(port, 'localhost', function(err) {
