@@ -1,4 +1,4 @@
-import { api } from './base';
+import { api } from './api';
 import { EventEmitter } from 'events';
 
 const resource = api.all('items');
@@ -27,7 +27,7 @@ Items.create = text => {
             .then(response => {
                 var newItem = response.body().data();
                 Items.emit('update');
-                resolve(Items.items);
+                resolve();
             }, response => {
                 reject('Error saving new item');
             });

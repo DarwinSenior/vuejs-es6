@@ -31,7 +31,6 @@ export default {
             event.preventDefault();
             Items.create(this.newItem)
                 .then(response => {
-                    this.items = response;
                     this.newItem = '';
                 });
         }
