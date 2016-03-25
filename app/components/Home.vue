@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import items from '../services/items';
+import Items from '../services/items';
 import ItemList from './ItemList.vue';
 
 export default {
@@ -26,14 +26,14 @@ export default {
             newItem: ''
         }
     },
-    methods: { 
+    methods: {
         saveItem(event) {
             event.preventDefault();
-            items.save(this.newItem)
+            Items.create(this.newItem)
                 .then(response => {
                     this.items = response;
                     this.newItem = '';
-                }); 
+                });
         }
     }
 }
