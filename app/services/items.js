@@ -1,9 +1,8 @@
 import { api } from './api';
-import { EventEmitter } from 'events';
 
 const resource = api.all('items');
 
-const Items = new EventEmitter();
+const Items = {};
 export { Items as default };
 
 // Delete several items at a time
@@ -26,7 +25,6 @@ Items.create = text => {
         resource.post({ content: text, checked: false })
             .then(response => {
                 var newItem = response.body().data();
-                Items.emit('update');
                 resolve();
             }, response => {
                 reject('Error saving new item');

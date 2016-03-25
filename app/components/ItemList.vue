@@ -48,17 +48,16 @@ export default {
             return filters[this.visibility](this.items);
         }
     },
-    created() {
-        Items.on('update', this.getItems);
-    },
     data() {
         return {
             items: [],
             visibility: 'active'
         }
     },
-    destroyed() {
-        Items.removeListener('update', this.getItems);
+    events: {
+        'itemAdded': function(item) {
+            this.getItems();
+        }
     },
     methods: {
         deleteAll() {

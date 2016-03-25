@@ -31,6 +31,8 @@ export default {
             event.preventDefault();
             Items.create(this.newItem)
                 .then(response => {
+                    // Let children know that a new item was added
+                    this.$broadcast('itemAdded', this.newItem);
                     this.newItem = '';
                 });
         }
