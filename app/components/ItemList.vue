@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import items from '../services/items';
+import Items from '../services/items';
 
 var filters = {
     all: items => {
@@ -42,14 +42,14 @@ var filters = {
     }
 }
 
-export default { 
+export default {
     computed: {
         filteredItems: function() {
             return filters[this.visibility](this.items);
         }
-    },  
-    created () {
-        items.on('update', this.getItems);
+    },
+    created() {
+        Items.on('update', this.getItems);
     },
     data() {
         return {
@@ -58,11 +58,11 @@ export default {
         }
     },
     destroyed() {
-        items.removeListener('update', this.getItems);
+        Items.removeListener('update', this.getItems);
     },
     methods: {
         deleteAll() {
-            items.bulkDelete(this.filteredItems)
+            Items.bulkDelete(this.filteredItems)
                 .then(response => {
                     this.getItems();
                 });
@@ -74,18 +74,18 @@ export default {
             else
                 item.checked = true;
 
-            items.update(item);
+            Items.update(item);
         },
         getItems() {
-            items.getAll()
+            Items.getAll()
                 .then(response => {
                     this.items = response;
-                }); 
+                });
         }
     },
     ready() {
         this.getItems();
-    } 
+    }
 }
 </script>
 
