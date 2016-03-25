@@ -1,8 +1,7 @@
 import { api } from './api';
 
-const resource = api.all('items');
-
 const Items = {};
+Items.resource = api.all('items');
 export { Items as default };
 
 // Delete several items at a time
@@ -10,7 +9,7 @@ Items.bulkDelete = (itemsToDelete) => {
     return new Promise((resolve, reject) => {
         if (itemsToDelete.length > 0) {
             itemsToDelete.forEach(i => {
-                resource.delete(i._id);
+                Items.resource.delete(i._id);
             });
 
             resolve();
@@ -22,10 +21,10 @@ Items.bulkDelete = (itemsToDelete) => {
 // Create an item
 Items.create = text => {
     return new Promise((resolve, reject) => {
-        resource.post({ content: text, checked: false })
+        Items.resource.post({ content: text, checked: false })
             .then(response => {
                 var newItem = response.body().data();
-                resolve();
+                resolve(newItem);
             }, response => {
                 reject('Error saving new item');
             });
@@ -35,7 +34,7 @@ Items.create = text => {
 // Retrieve all items
 Items.getAll = () => {
     return new Promise((resolve, reject) => {
-        resource.getAll()
+        Items.resource.getAll()
             .then(response => {
                 const entities = response.body();
                 var i = [];
@@ -54,7 +53,7 @@ Items.getAll = () => {
 // Update an item
 Items.update = item => {
     return new Promise((resolve, reject) => {
-        resource.put(item._id, item)
+        Items.resource.put(item._id, item)
             .then(response => {
                 resolve();
             }, response => {
