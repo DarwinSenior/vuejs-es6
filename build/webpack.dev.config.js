@@ -14,8 +14,9 @@ config.plugins = (config.plugins || []).concat([
     new webpack.NoErrorsPlugin(),
     new HtmlWebpackPlugin({
         filename: 'index.html',
-        template: 'app/index.html',
-        inject: true
+        template: 'app/index.ejs',
+        inject: true,
+        title: 'Dev: &#161;Todo! A Simple To-Do App'
     })
 ]);
 

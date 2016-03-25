@@ -45,15 +45,14 @@ config.plugins = (config.plugins || []).concat([
   // see https://github.com/ampedandwired/html-webpack-plugin
   new HtmlWebpackPlugin({
     filename: 'index.html',
-    template: 'app/index.html',
+    template: 'app/index.ejs',
     inject: true,
     minify: {
       removeComments: true,
       collapseWhitespace: true,
       removeAttributeQuotes: true
-      // more options:
-      // https://github.com/kangax/html-minifier#options-quick-reference
-    }
+    },
+    title: '&#161;Todo! A Simple To-Do App'
   })
 ])
 
