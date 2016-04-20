@@ -1,3 +1,6 @@
+import { polyfill } from 'es6-promise';
+polyfill();
+
 // Global app imports
 import { nodeEnv } from './config';
 import Vue from 'vue';
